@@ -1,0 +1,199 @@
+/* TOPBAR */
+.aw-topbar {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	min-height: 50px;
+	z-index: 9999;
+	background-color: #000;
+	-webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	-moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+.aw-topbar>img {
+	margin-top: 10px;
+	margin-left: 5px;
+}
+
+/* SIDEBAR */
+.aw-sidebar {
+	position: fixed;
+	top: 55px;
+	bottom: 0;
+	left: 0;
+	width: 210px;
+	margin-left: -211px;
+	z-index: 9998;
+	transition: margin-left 0.5s;
+	overflow-y: auto;
+	background-color: #f6f6f6;
+	border-right: 1px solid #eaeaea;
+}
+
+.aw-sidebar.is-toggled {
+	margin-left: 0px;
+}
+
+@media ( min-width : 1025px) {
+	.aw-sidebar {
+		margin-left: 0px;
+	}
+	.aw-sidebar.is-toggled {
+		margin-left: -211px;
+	}
+}
+
+/* CONTENT */
+.aw-content {
+	padding: 0 15px;
+	margin-top: 55px;
+}
+
+
+footer {
+	padding: 0px 8px;
+	margin-bottom: 10px
+}
+
+
+.Fonte {
+	font-size: 16px; 
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+button.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+button.accordion.active, button.accordion:hover {
+    background-color: #ddd;
+}
+
+
+ /*SELECIONADO*/
+button.active .fa:last-child {
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
+button.active .fa:last-child {
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    float: right;
+}
+
+/*Não selecionado*/
+button .fa:last-child {
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    float: right;
+}
+
+
+button .fa {
+    vertical-align: middle;
+    font-size: 16px;
+}
+
+
+
+
+div.panel {
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+
+
+
+/************************************/
+/* teste menu multi level drop down */
+/************************************/
+
+.drop_menu {
+    list-style: none;
+    padding: 7px;
+    margin: 0;
+    background: #000000;
+}
+
+.drop_menu li {
+    display: block;
+    position: relative;
+    float: left;
+    background: #000000;
+}
+
+/* This hides the dropdowns */
+
+
+.drop_menu ul { display: none; }
+
+.drop_menu li a {
+    display: block;
+    padding: 1em;
+    text-decoration: none;
+    white-space: nowrap;
+    color: #fff;
+}
+
+.drop_menu li a:hover { background: #000000; }
+
+/* Display the dropdown */
+
+
+li:hover > ul {
+    display: block;
+    position: absolute;
+    padding-left: 0px;
+    padding-top: 8px;
+}
+
+li:hover li { float: none; }
+
+li:hover a { background: #000000; }
+
+li:hover li a:hover { background: #2cb34a; }
+
+.main-navigation li ul li { border-top: 0; }
+
+/* Displays second level dropdowns to the right of the first level dropdown */
+
+
+.drop_menu ul ul {
+    right: 100%;
+    padding: 0px;
+    top: 0;
+}
+
+/* Simple clearfix */
+
+
+
+ul:before,
+ul:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+ul:after { clear: both; }

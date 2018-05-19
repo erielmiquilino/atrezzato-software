@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/template/Layout.xhtml">
+
+    <ui:define name="content">
+
+        <h:form id="frm"  target="_blank"  >
+
+            <br/>
+
+            <p:messages id="messages" closable="true">
+                <p:autoUpdate />
+            </p:messages>
+
+            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                <p:outputLabel for="kit" value="Nº Kit:" />
+                <p:inputNumber  id="kit" value="#{kitBean.kit.codigo}" decimalPlaces="0" onblur="processaNumeroKit()"  />
+                <p:outputLabel for="produto" value="Produto:" />
+                <p:selectOneRadio id="produto" value="#{kitBean.produto}">
+                    <f:selectItems value="#{kitBean.produtos}" var="tipo"
+                                   itemValue="#{tipo}" itemLabel="#{tipo.descricao}" />
+                </p:selectOneRadio>
+                <p:outputLabel for="preco" value="Preço:" />
+                <p:inputNumber id="preco" value="#{kitBean.kitItem.valorUnitario}"
+                               onkeydown="if (event.keyCode === 13) { incluir(); return false; }"
+                               oncomplete="$(function(){PrimeFaces.focus('preco');});"
+                               symbol="R$ " decimalSeparator="," thousandSeparator="." decimalPlaces="2" />
+
+            </h:panelGrid>
+
+            <p:remoteCommand name="processaNumeroKit" process="kit" update="gerarFicha"/>
+
+            <p:remoteCommand name="incluir"
+                             action="#{kitBean.incluirProduto()}"
+                             process="@this, preco, produto, contador"
+                             update="kits, preco, contador"/>
+
+
+            <h:panelGrid columns="2" >
+
+                <p:commandButton value="Salvar e gerar Ficha" actionListener="#{kitBean.gerarFicha()}"
+                                 ajax="false" disabled="#{kitBean.kit.codigo == null or kitBean.kit.codigo == 0}" id="gerarFicha"
+                                 global="false"/>
+                <p:outputLabel id="contador" value="Brincos: #{kitBean.brincos}  -  Correntes: #{kitBean.correntes}  -  Pulseiras: #{kitBean.pulseiras}  -  Aneis: #{kitBean.aneis}  -  Pingentes: #{kitBean.pingentes}  -  Total de Peças: #{kitBean.kit.totalItens}"  />
+            </h:panelGrid>
+
+
+
+            <p:dataTable id="kits" var="kit" style="margin-top: 15px" value="#{kitBean.kit.kitItems}">
+                <p:column headerText="Produto">
+                    <h:outputText value="#{kit.produto.descricao}" />
+                </p:column>
+
+                <p:column headerText="Referência">
+                    <h:outputText value="#{kit.referencia}" />
+                </p:column>
+
+                <p:column headerText="Valor">
+                    <h:outputText value="R$ #{kit.valorUnitario}" />
+                </p:column>
+
+                <p:column headerText="..." >
+                    <p:commandButton value="Remover" process="kits, frm:contador" update="kits, frm:contador"
+                                     actionListener="#{kitBean.removerProduto(kit)}"/>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
